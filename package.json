@@ -4,7 +4,11 @@
   "description": "Web server for Dynium robot web app PoC",
   "main": "server.js",
   "scripts": {
+    "build-ts": "tsc",
     "start": "node server.js",
+    "serve": "node dist/server.js",
+    "watch-node": "nodemon dist/server.js",
+    "watch-ts": "tsc -w",
     "test": "test"
   },
   "author": "",
