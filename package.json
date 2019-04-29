@@ -1,7 +1,7 @@
 {
   "name": "web-server",
   "version": "1.0.0",
-  "description": "Web server for Dynium robot web app PoC",
+  "description": "",
   "main": "server.js",
   "scripts": {
     "build-ts": "tsc",

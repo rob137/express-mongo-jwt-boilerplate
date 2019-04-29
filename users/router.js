@@ -10,6 +10,7 @@ router.post('/', jsonParser, (req, res) => {
   const missingField = requiredFields.find(field => !(field in req.body));
 
   if (missingField) {
+    console.log(req.body);
     return res.status(422).json({
       code: 422,
       reason: 'ValidationError',
@@ -32,7 +33,7 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
-  explicitlyTrimmedFields = ['username', 'password'];
+  const explicitlyTrimmedFields = ['username', 'password'];
   const nonTrimmedField = explicitlyTrimmedFields.find(
     field => req.body[field].trim() !== req.body[field]
   );
@@ -58,7 +59,7 @@ router.post('/', jsonParser, (req, res) => {
   const tooSmallField = Object.keys(sizedFields).find(
     field =>
       'min' in sizedFields[field] &&
-        req.body[field].trim().length < sizefFields[field].min
+        req.body[field].trim().length < sizedFields[field].min
   );
   const tooLargeField = Object.keys(sizedFields).find(
     field =>
@@ -69,7 +70,7 @@ router.post('/', jsonParser, (req, res) => {
   if (tooSmallField || tooLargeField) {
     const message = tooSmallField ?
       `Must be at least ${sizedFields[tooSmallField].min} characters long` :
-      `Must be at most ${sizedFields[tooLargeField].max} characters long`,
+      `Must be at most ${sizedFields[tooLargeField].max} characters long`;
     return res.status(422).json({
       code: 422,
       reason: 'ValidationError',

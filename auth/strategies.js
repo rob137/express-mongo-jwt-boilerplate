@@ -34,7 +34,7 @@ const localStrategy = new LocalStrategy((username, password, callback) => {
     });
 });
 
-const JwtStrategy = new JwtStrategy(
+const jwtStrategy = new JwtStrategy(
   {
     secretOrKey: JWT_SECRET,
     jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
