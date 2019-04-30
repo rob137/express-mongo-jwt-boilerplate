@@ -10,6 +10,10 @@ const { router: usersRouter } = require('./users');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 
 mongoose.Promise = global.Promise;
+// Settings to prevent mongo warnings (required as at 30 Apr 19)
+// See https://stackoverflow.com/questions/51960171/node63208-deprecationwarning-collection-ensureindex-is-deprecated-use-creat
+mongoose.set('useCreateIndex', true);
+mongoose.set('useNewUrlParser', true);
 
 const { PORT, DATABASE_URL } =  require('./config');
 
@@ -72,5 +76,3 @@ function closeServer() {
 if (require.main === module) {
   runServer(DATABASE_URL).catch(err => console.error(err));
 }
-
-module.exports = { app, runServer, closeServer };
